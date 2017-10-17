@@ -38,6 +38,14 @@
             android:text="play Recorded audio"
             android:textColor="#ffffff"
             android:background="@drawable/button_shape" />
+        <Button
+            android:id="@+id/play_to_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="play to next"
+            android:textColor="#ffffff"
+            android:background="@drawable/button_shape" />
 
         <Button
             android:id="@+id/stop_recorded_audio"

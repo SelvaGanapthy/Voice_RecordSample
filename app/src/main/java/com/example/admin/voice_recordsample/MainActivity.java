@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
-    Button start_recording, stop_Recording, start_Recordedaudio, stop_Recordedaudio;
+    Button start_recording, stop_Recording, start_Recordedaudi, stop_Recordedaudi,play_to_next;
     ImageView imageView;
     String audiopath = null;
     MediaRecorder mr;
@@ -43,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
         start_recording = (Button) findViewById(R.id.record_start);
         imageView=(ImageView)findViewById(R.id.get_iv);
         stop_Recording = (Button) findViewById(R.id.record_stop);
-        start_Recordedaudio = (Button) findViewById(R.id.play_recorded_audio);
-        stop_Recordedaudio = (Button) findViewById(R.id.stop_recorded_audio);
+        //start_Recordedaudio = (Button) findViewById(R.id.play_recorded_audio);
+        play_to_next = (Button) findViewById(R.id.play_to_next);
+      //  stop_Recordedaudio = (Button) findViewById(R.id.stop_recorded_audio);
         stop_Recording.setEnabled(false);
-        stop_Recordedaudio.setEnabled(false);
-        start_Recordedaudio.setEnabled(false);
+      //  stop_Recordedaudio.setEnabled(false);
+        //start_Recordedaudio.setEnabled(false);
         random = new Random();
         start_recording.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
                 mr.stop();
                 stop_Recording.setEnabled(false);
                 start_recording.setEnabled(true);
-                start_Recordedaudio.setEnabled(true);
-                stop_Recordedaudio.setEnabled(false);
+          //      start_Recordedaudio.setEnabled(true);
+            //    stop_Recordedaudio.setEnabled(false);
                 Snackbar.make(view, "Voice Recorded", Snackbar.LENGTH_SHORT).show();
             }
         });
 
-        start_Recordedaudio.setOnClickListener(new View.OnClickListener() {
+      /*  start_Recordedaudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) throws IllegalArgumentException,
                     SecurityException, IllegalStateException {
@@ -116,7 +117,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+*/
+        play_to_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,Songplay.class).putExtra("song",audiopath));
 
+            }
+        });
     }
 
     public boolean checkPermisson() {
