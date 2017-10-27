@@ -25,13 +25,16 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
-    Button start_recording, stop_Recording, start_Recordedaudi, stop_Recordedaudi,play_to_next;
+    Button start_recording, stop_Recording, start_Recordedaudi, stop_Recordedaudi, play_to_next;
     ImageView imageView;
     String audiopath = null;
     MediaRecorder mr;
     MediaPlayer mp;
+    CircleImageView c1;
     public static final int requestcode_permisson = 1;
     Random random;
     String randomaudio_Names = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -41,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         start_recording = (Button) findViewById(R.id.record_start);
-        imageView=(ImageView)findViewById(R.id.get_iv);
+
         stop_Recording = (Button) findViewById(R.id.record_stop);
         //start_Recordedaudio = (Button) findViewById(R.id.play_recorded_audio);
         play_to_next = (Button) findViewById(R.id.play_to_next);
-      //  stop_Recordedaudio = (Button) findViewById(R.id.stop_recorded_audio);
+        //  stop_Recordedaudio = (Button) findViewById(R.id.stop_recorded_audio);
         stop_Recording.setEnabled(false);
-      //  stop_Recordedaudio.setEnabled(false);
+        //  stop_Recordedaudio.setEnabled(false);
         //start_Recordedaudio.setEnabled(false);
         random = new Random();
         start_recording.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 mr.stop();
                 stop_Recording.setEnabled(false);
                 start_recording.setEnabled(true);
-          //      start_Recordedaudio.setEnabled(true);
-            //    stop_Recordedaudio.setEnabled(false);
+                //      start_Recordedaudio.setEnabled(true);
+                //    stop_Recordedaudio.setEnabled(false);
                 Snackbar.make(view, "Voice Recorded", Snackbar.LENGTH_SHORT).show();
             }
         });
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         play_to_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Songplay.class).putExtra("song",audiopath));
+                startActivity(new Intent(MainActivity.this, Songplay.class).putExtra("song", audiopath));
 
             }
         });
@@ -171,11 +174,12 @@ public class MainActivity extends AppCompatActivity {
             sb.append(randomaudio_Names.charAt(random.nextInt(randomaudio_Names.length())));
         return sb.toString();
     }
-    public void chooseimg(View v)
-    {
-        Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+    public void chooseimg(View v) {
+        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -187,8 +191,8 @@ public class MainActivity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            ImageView imageView = (ImageView) findViewById(R.id.get_iv);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            c1 = (CircleImageView) findViewById(R.id.get_iv);
+            c1.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
     }
 }

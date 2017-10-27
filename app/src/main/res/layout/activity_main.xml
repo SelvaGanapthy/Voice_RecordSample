@@ -55,7 +55,7 @@
             android:text="Stop Record audio"
             android:textColor="#ffffff"
             android:background="@drawable/button_shape" />
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="12dp"
             android:layout_width="200dp"
             android:layout_gravity="center"
